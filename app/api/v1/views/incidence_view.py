@@ -23,4 +23,75 @@ class Incidences(Resource):
 			return {"status" : 404, "Message" : "There are no incidences"}, 404
 		return {"status" : 200, "Incidences" : incidences}, 200
 
-	
+
+	def post(self):
+		'''Creates a new Incidence'''
+		data = request.get_json()
+		id = len(incidences) + 1
+		name = data['name']
+		createdOn = get_time()
+		createdBy = data['createdBy']
+		type = data['type']
+		location = data['location']
+		status = data['status']
+		images = data['images']
+		videos = data['videos']
+		comments = data['comments']
+
+
+		new_item = {
+			"id" : id,
+			"name" : name,
+			"createdOn" : createdOn,
+			"createdBy" : createdBy,
+			"type" : type,
+			"location" : location,
+			"status" : status,
+			"images" : images,
+			"videos" : videos,
+			"comments" : comments
+		}
+
+		check_data = IncidenceModel(name, createdBy, type, location, status, images, videos, comments)
+		if not check_data.validate():
+			incidences.append(new_item)
+			return {"status" : 201, "Message" : "Incidence created successfully.", "Item" : new_item}, 201
+
+
+
+@api.route('/v1/incidence/<int:id>')
+class Incidence(Resource):
+	def get(self, id):
+		'''Gets a specific Incidence using the id'''
+		inc = [incident for incident in incidences if incident['id'] == id]
+		if inc:
+			return {"status" : 200, "Incidence" : inc}, 200
+		return {"status" : 404, "Message" : "Incidence #{} not found.".format(id)}
+
+	def put(self, id):
+		'''Updates a single Incidence'''
+		inc = [incident for incident in incidences if incident['id'] == id]
+
+		if inc:
+			data = request.get_json()
+			inc[0]['name'] = data['name']
+			inc[0]['createdBy'] = data['createdBy']
+			inc[0]['type'] = data['type']
+			inc[0]['location'] = data['location']
+			inc[0]['status'] = data['status']
+			inc[0]['images'] = data['images']
+			inc[0]['videos'] = data['videos']
+			inc[0]['comments'] = data['comments']
+
+			return {"status" : 200, "Message" : "Incidence updated successfully", "Incidence" : inc[0]}, 200
+		return {"status" : 404, "Message" : "Incidence not found"}, 404
+
+
+	def delete(self, id):
+		'''Deletes a single Incidence'''
+		inc = [incident for incident in incidences if incident['id'] == id]
+		if inc:
+			incidences.remove(inc[0])
+			return {"status" : 200, "Message" : "Incident deleted successfully."}, 200
+		return {"statu" : 404, "Message" : "Incidence not found, deletion failed"}, 404
+
