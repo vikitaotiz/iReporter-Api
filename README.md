@@ -18,7 +18,7 @@ Corruption is a huge bane to Africa’s development. African countries must deve
  | Method         | Endpoint               | Description              |
  |----------------|------------------------|--------------------------|
  | Get            | api/v1/incidences      | Gets all incidences      |
- | Get            | api/v1/incidence/1     | Get single a incidence   |
+ | Get            | api/v1/incidence/1     | Get a single incidence   |
  | Post           | api/v1/incidences      | Creates an incidence     |
  | Put            | api/v1/incidence/1     | Updates an incidence     |
  | Delete         | api/v1/incidence/1     | Deletes single incidence |
