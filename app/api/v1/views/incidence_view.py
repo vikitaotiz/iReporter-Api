@@ -23,7 +23,6 @@ class Incidences(Resource):
 			return {"status" : 404, "Message" : "There are no incidences"}, 404
 		return {"status" : 200, "Incidences" : incidences}, 200
 
-
 	def post(self):
 		'''Creates a new Incidence'''
 		data = request.get_json()
@@ -56,8 +55,6 @@ class Incidences(Resource):
 		if not check_data.validate():
 			incidences.append(new_item)
 			return {"status" : 201, "Message" : "Incidence created successfully.", "Item" : new_item}, 201
-
-
 
 @api.route('/v1/incidence/<int:id>')
 class Incidence(Resource):
