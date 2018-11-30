@@ -1,0 +1,9 @@
+env
+.git
+.vscode
+instance/__pycache__
+app/__pycache__
+app/api/v1/__pycache__
+app/api/v1/models/__pycache__
+app/api/v1/views/__pycache__
+app/api/v1/utils/__pycache__

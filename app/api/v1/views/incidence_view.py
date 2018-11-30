@@ -64,3 +64,31 @@ class Incidence(Resource):
 		if inc:
 			return {"status" : 200, "Incidence" : inc}, 200
 		return {"status" : 404, "Message" : "Incidence #{} not found.".format(id)}
+
+	def put(self, id):
+		'''Updates a single Incidence'''
+		inc = [incident for incident in incidences if incident['id'] == id]
+
+		if inc:
+			data = request.get_json()
+			inc[0]['name'] = data['name']
+			inc[0]['createdBy'] = data['createdBy']
+			inc[0]['type'] = data['type']
+			inc[0]['location'] = data['location']
+			inc[0]['status'] = data['status']
+			inc[0]['images'] = data['images']
+			inc[0]['videos'] = data['videos']
+			inc[0]['comments'] = data['comments']
+
+			return {"status" : 200, "Message" : "Incidence updated successfully", "Incidence" : inc[0]}, 200
+		return {"status" : 404, "Message" : "Incidence not found"}, 404
+
+
+	def delete(self, id):
+		'''Deletes a single Incidence'''
+		inc = [incident for incident in incidences if incident['id'] == id]
+		if inc:
+			incidences.remove(inc[0])
+			return {"status" : 200, "Message" : "Incident deleted successfully."}, 200
+		return {"statu" : 404, "Message" : "Incidence not found, deletion failed"}, 404
+
