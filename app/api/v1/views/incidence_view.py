@@ -65,7 +65,7 @@ class Incidence(Resource):
 			return {"status" : 200, "Incidence" : inc}, 200
 		return {"status" : 404, "Message" : "Incidence #{} not found.".format(id)}
 
-	def put(self, id):
+    def put(self, id):
 		'''Updates a single Incidence'''
 		inc = [incident for incident in incidences if incident['id'] == id]
 
@@ -83,8 +83,7 @@ class Incidence(Resource):
 			return {"status" : 200, "Message" : "Incidence updated successfully", "Incidence" : inc[0]}, 200
 		return {"status" : 404, "Message" : "Incidence not found"}, 404
 
-
-	def delete(self, id):
+    def delete(self, id):
 		'''Deletes a single Incidence'''
 		inc = [incident for incident in incidences if incident['id'] == id]
 		if inc:
