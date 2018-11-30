@@ -23,6 +23,7 @@ class Incidences(Resource):
 			return {"status" : 404, "Message" : "There are no incidences"}, 404
 		return {"status" : 200, "Incidences" : incidences}, 200
 
+
 	def post(self):
 		'''Creates a new Incidence'''
 		data = request.get_json()
@@ -56,6 +57,8 @@ class Incidences(Resource):
 			incidences.append(new_item)
 			return {"status" : 201, "Message" : "Incidence created successfully.", "Item" : new_item}, 201
 
+
+
 @api.route('/v1/incidence/<int:id>')
 class Incidence(Resource):
 	def get(self, id):
@@ -65,7 +68,7 @@ class Incidence(Resource):
 			return {"status" : 200, "Incidence" : inc}, 200
 		return {"status" : 404, "Message" : "Incidence #{} not found.".format(id)}
 
-    def put(self, id):
+	def put(self, id):
 		'''Updates a single Incidence'''
 		inc = [incident for incident in incidences if incident['id'] == id]
 
@@ -83,7 +86,8 @@ class Incidence(Resource):
 			return {"status" : 200, "Message" : "Incidence updated successfully", "Incidence" : inc[0]}, 200
 		return {"status" : 404, "Message" : "Incidence not found"}, 404
 
-    def delete(self, id):
+
+	def delete(self, id):
 		'''Deletes a single Incidence'''
 		inc = [incident for incident in incidences if incident['id'] == id]
 		if inc:
