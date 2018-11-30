@@ -44,41 +44,20 @@ class TestIncidences(unittest.TestCase):
         res = self.tests.post('/api/v1/incidences', data = incidence_data, content_type="application/json")
         self.assertEqual(res.status_code, 201)
 
-    def test_post_incidences(self):
-        incidence_data = json.dumps({
-            "name" : "",
-        	"createdBy" : "vikita Otiz",
-        	"type" : "Red Flag",
-        	"location" : "1.234, 3.4567",
-        	"status" : "",
-        	"images" : "1111",
-        	"videos" : "2222",
-        	"comments" : "Was good"
-        })
 
         res = self.tests.post('/api/v1/incidences', data = incidence_data, content_type="application/json")
-        self.assertEqual(res.status_code, 404)
+        self.assertNotEqual(res.status_code, 404)
 
     def test_get_incidence(self):
         result = self.tests.get("/api/v1/incidence/1", content_type="application/json")
         self.assertNotEqual(result.status_code, 404)
         self.assertEqual(result.status_code, 200)
 
-    def test_get_incidence(self):
-        result = self.tests.get("/api/v1/incidence/5", content_type="application/json")
-        self.assertNotEqual(result.status_code, 404)
 
     def test_delete_incidence(self):
         result = self.tests.delete("/api/v1/incidence/1", content_type="application/json")
         self.assertEqual(result.status_code, 200)
 
-    def test_delete_incidence(self):
-        result = self.tests.delete("/api/v1/incidence/10", content_type="application/json")
-        self.assertEqual(result.status_code, 404)
-
-    def test_put_incidence(self):
-        result = self.tests.put("/api/v1/incidence/1", content_type="application/json")
-        self.assertEqual(result.status_code, 400)
 
     def test_put_incidence(self):
         result = self.tests.put("/api/v1/incidence/10", content_type="application/json")
