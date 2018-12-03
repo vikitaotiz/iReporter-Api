@@ -2,7 +2,7 @@ import unittest
 import json
 
 from app.api.v1.views.incidence_view import Incidences, Incidence
-from run import app
+from app import app
 
 class TestIncidences(unittest.TestCase):
     def setUp(self):
