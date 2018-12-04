@@ -3,6 +3,7 @@ python:
   - "3.6"
 install:
   - pip3 install -r requirements.txt
+  - pip install coveralls codecov
 
 script:
   - coverage run --source=app -m pytest && coverage report
