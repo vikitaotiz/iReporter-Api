@@ -1,13 +1,27 @@
-from flask import Blueprint
+from flask import Flask
+from flask_restful import Api
+from instance.config import config
 
-from app.api.v1.views.incidence_view import app, Incidence, Incidences, api_incidence, api_incidences
-# from app.api.v1.views.auth_api import register, login, user_username, logout, all_users
+from app.api.v1.views.incidences_view import IncidentRecords, IncidentRecord, IncidentLocation, IncidentComment
 
-app.register_blueprint(api_incidences)
-app.register_blueprint(api_incidence)
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
 
-# app.register_blueprint(register)
-# app.register_blueprint(login)
-# app.register_blueprint(user_username)
-# app.register_blueprint(logout)
-# app.register_blueprint(all_users)
+    from app.api import api_bp as api_blueprint
+    api = Api(api_blueprint)
+
+    app.register_blueprint(api_blueprint, url_prefix="/api/v1")
+
+    routes(api)
+    
+    return app
+
+def routes(api):
+    api.add_resource(IncidentRecords, "/incidences")
+    api.add_resource(IncidentRecord, "/incidences/<int:incident_id>")
+    api.add_resource(IncidentLocation, "/incidences/<int:incident_id>/location")
+    api.add_resource(IncidentComment,  "/incidences/<int:incident_id>/comment")
+
+    return None
+

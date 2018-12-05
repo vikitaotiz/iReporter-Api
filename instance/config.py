@@ -1,19 +1,20 @@
-class Config(object):
+class Config:
     DEBUG = False
-
-class ProductionConfig(Config):
-    DEBUG = False
-
-
-class StagingConfig(Config):
-    DEVELOPMENT = True
-    DEBUG = True
-
 
 class DevelopmentConfig(Config):
-    DEVELOPMENT = True
     DEBUG = True
-
 
 class TestingConfig(Config):
     TESTING = True
+    DEBUG = True
+
+class ProductionConfig(Config):
+    DEBUG = False
+    TESTING = False
+
+config = {
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
+    'default': DevelopmentConfig
+}
