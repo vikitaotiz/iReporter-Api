@@ -32,7 +32,7 @@ class Incidences:
     @staticmethod
     def find_by_id(incidence_id):
         for incidence in incidences:
-            if incidence_id['incidence_id'] == incidence_id:
+            if incidence.id == incidence_id:
                 return incidence
         return None
 

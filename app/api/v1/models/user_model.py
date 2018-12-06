@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 users = []
 
 class User:
-    id = 1
+    user_id = 1
 
     def __init__(self, username, password, firstname, lastname, email=None, phonenumber=None):
         self.firstname = firstname
@@ -13,7 +13,7 @@ class User:
         self.username = username
         self.password = User.hash_password(password)
 
-        User.id += 1
+        User.user_id += 1
 
     @staticmethod
     def find_by_name(username):
@@ -30,9 +30,9 @@ class User:
         return None
 
     @classmethod
-    def hash_password(cls, plain_password):
-        if plain_password:
-            return generate_password_hash(plaintext_password)
+    def hash_password(cls, clear_password):
+        if clear_password:
+            return generate_password_hash(clear_password)
 
         return None
 
