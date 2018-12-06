@@ -30,6 +30,9 @@ class Database:
         )"""
         return self.cursor.execute(create_table)
 
+    def get_all_incidences(self):
+        get_data = """SELECT * FROM incidences"""
+        return self.cursor.execute(get_data)
 
 db_con = Database()
 db_con.create_users_table()

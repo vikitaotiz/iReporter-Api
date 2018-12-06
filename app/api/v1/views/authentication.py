@@ -1,6 +1,6 @@
 import datetime
 from flask_restful import Resource, reqparse
-from app.api.v1.models.user import User
+from app.api.v1.models.user_model import User
 from flask_jwt_extended import create_access_token
 
 parser = reqparse.RequestParser(bundle_errors=True)
@@ -24,14 +24,14 @@ class Login(Resource):
 
         return {"status": 400,
                 "data": [{
-                    "message": "User doesn't exists"
+                    "message": "This user doesn't exists"
                 }]}, 400
 
 
 class Register(Resource):
-    parser.add_argument('username', type=str, default="", help='This field can be left blank!')
     parser.add_argument('firstname', type=str, default="", help='This field can be left blank!')
     parser.add_argument('lastname', type=str, default="", help='This field can be left blank!')
+    parser.add_argument('othername', type=str, default="", help='This field can be left blank!')
     parser.add_argument('email', type=str, default="", help='This field can be left blank!')
     parser.add_argument('phonenumber', type=str, default="", help='This field can be left blank!')
 
@@ -42,7 +42,7 @@ class Register(Resource):
         if usr:
             return {"status": 400,
                     "data": [{
-                        "message": "User already exists"
+                        "message": "A user with that username already exists"
                     }]}, 400
 
         user = User(**data)

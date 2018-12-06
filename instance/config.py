@@ -1,5 +1,7 @@
 class Config:
     DEBUG = False
+    BUNDLE_ERRORS = True
+    JWT_SECRET_KEY = "qwert12345"
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -18,3 +20,4 @@ config = {
     'production': ProductionConfig,
     'default': DevelopmentConfig
 }
+
