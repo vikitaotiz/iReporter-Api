@@ -28,3 +28,5 @@ Corruption is a huge bane to Africa’s development. African countries must deve
 
 # Author
 Victor Otieno
+# Licence
+MIT
