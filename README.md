@@ -26,6 +26,9 @@ Corruption is a huge bane to Africa’s development. African countries must deve
  | Post           | api/v1/incidences/register | Creates a user        |
 
 
+#
+# Heroku
+[View It Here](https://ireporter-app-api.herokuapp.com/api/v1/incidences)
 # Author
 Victor Otieno
 # Licence
