@@ -14,13 +14,13 @@ parser.add_argument('videos', action='append', help="This field can be left blan
 parser.add_argument('comment', type=str, required=True, help="This field cannot be left blank!" )
 
 class IncidentRecords(Resource):
-    @jwt_required
+    #@jwt_required
     def get(self):
         if len(incidences) <= 0:
             return {"status" : 200, "Message" : "There are no incidence records."}, 200
         return { "status": 200, "data": [item.json_data() for item in Incidences.get_all()]}, 200
     
-    @jwt_required
+    #@jwt_required
     def post(self):
         data = parser.parse_args()
 
@@ -34,7 +34,7 @@ class IncidentRecords(Resource):
 
 
 class IncidentRecord(Resource):
-    @jwt_required
+    #@jwt_required
     def get(self, incident_id):
         incident = Incidences.find_by_id(incident_id)
         if incident:
@@ -46,7 +46,7 @@ class IncidentRecord(Resource):
                      "message": "Incident record does not exist."
                 }]}, 404
 
-    @jwt_required
+    #@jwt_required
     def put(self, incident_id):
         data = parser.parse_args()
         incident = Incidences.find_by_id(incident_id)
